@@ -5,6 +5,7 @@ const authRouter = require("./routes/authRouter");
 const session = require("express-session");
 const passport = require("./config/passport");
 const pgSession = require("connect-pg-simple")(session);
+const ensureAuthenticated = require("./middleware/auth");
 
 const app = new express();
 
@@ -35,7 +36,7 @@ app.get("/test-auth", (req, res) => {
   res.json(req.user || "not logged in");
 });
 
-app.get("/", (req, res) => {
+app.get("/", ensureAuthenticated, (req, res) => {
   res.render("index");
 });
 

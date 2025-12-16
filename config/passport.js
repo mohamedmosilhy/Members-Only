@@ -1,6 +1,6 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const bycrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 const pool = require("../db/pool");
 
 passport.serializeUser((user, done) => {
@@ -28,7 +28,7 @@ passport.use(
       if (!user) {
         return done(null, false, { message: "Incorrect username." });
       }
-      const isMatch = await bycrypt.compare(password, user.password);
+      const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
         return done(null, false, { message: "Incorrect password." });
       }

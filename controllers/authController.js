@@ -1,5 +1,6 @@
-const bycrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 const pool = require("../db/pool");
+const passport = require("../config/passport");
 
 module.exports = {
   getSignUp: (req, res) => {
@@ -8,7 +9,7 @@ module.exports = {
   postSignUp: async (req, res) => {
     try {
       const { username, password } = req.body;
-      let hashedPassword = await bycrypt.hash(password, 10);
+      let hashedPassword = await bcrypt.hash(password, 10);
       await pool.query(
         "INSERT INTO users (username, password) VALUES ($1, $2)",
         [username, hashedPassword]
@@ -24,5 +25,15 @@ module.exports = {
   },
   getLogin: (req, res) => {
     res.render("login");
+  },
+  authUser: passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+  }),
+  logoutUser: (req, res, next) => {
+    req.logout((err) => {
+      if (err) return next(err);
+      res.redirect("/login");
+    });
   },
 };
