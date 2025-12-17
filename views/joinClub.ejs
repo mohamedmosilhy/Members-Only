@@ -4,24 +4,59 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Join Club</title>
+        <title>Join Club - Members Only</title>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+        <link rel="stylesheet" href="/styles.css">
     </head>
 
     <body>
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <a href="/" class="logo">🔐 Members Only</a>
+                <div class="user-info">
+                    <span class="username">Hello, <strong>
+                            <%= user.username %>
+                        </strong>!</span>
+                    <a href="/" class="btn btn-secondary">← Back to Home</a>
+                    <a href="/logout" class="btn btn-logout">Logout</a>
+                </div>
+            </div>
+        </header>
 
-        <p>Join Message Club</p>
-        <% if (user.is_member || user.is_admin) { %>
-            <p>You are already a member of the club.</p>
-            <% } %>
-                <% if (!user.is_member && !user.is_admin) { %>
+        <!-- Join Club Content -->
+        <div class="join-card">
+            <div class="join-icon">✨</div>
+            <h1 class="join-title">Join Message Club</h1>
+
+            <% if (user.is_member || user.is_admin) { %>
+                <div class="status-message">
+                    <span>🎉</span>
+                    <span>You are already a member of the club!</span>
+                </div>
+                <p class="join-description">
+                    You have full access to see all message authors. Return to the homepage to explore the community.
+                </p>
+                <a href="/" class="btn btn-primary btn-full">Go to Messages</a>
+                <% } else { %>
+                    <p class="join-description">
+                        Enter the secret code to unlock the full Members Only experience.
+                        You'll be able to see who wrote every message!
+                    </p>
+
                     <form action="/join-club" method="POST">
-                        <label for="secretCode">Secret Code</label>
-                        <input type="text" name="secretCode" placeholder="Enter Secret Code" required>
+                        <div class="form-group">
+                            <label for="secretCode" class="form-label">Secret Code</label>
+                            <input type="text" id="secretCode" name="secretCode" class="form-input"
+                                placeholder="Enter the secret code" required autofocus>
+                        </div>
 
-                        <button type="submit">Join Club</button>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            Unlock Membership
+                        </button>
                     </form>
                     <% } %>
-
+        </div>
     </body>
 
 </html>

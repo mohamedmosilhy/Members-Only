@@ -9,9 +9,9 @@ const {
   logoutUser,
 } = require("../controllers/authController");
 
-authRouter.get("/sign-up", getSignUp);
+authRouter.get("/signup", getSignUp);
 
-authRouter.post("/sign-up", postSignUp);
+authRouter.post("/signup", postSignUp);
 
 authRouter.get("/login", getLogin);
 authRouter.post("/login", authUser);

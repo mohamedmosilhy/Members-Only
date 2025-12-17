@@ -4,34 +4,85 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Members Only</title>
+        <title>Members Only - Exclusive Community</title>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+        <link rel="stylesheet" href="/styles.css">
     </head>
 
     <body>
-        <h1>Welcome to Members Only</h1>
-        <% if (!userIsMemberOrAdmin && user) { %>
-            <a href="/join-club">Join Club</a>
-            <% } %>
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <a href="/" class="logo">🔐 Members Only</a>
 
-                <% if (user) { %>
-                    <p>Hello, <%= user.username %>!</p>
+                <div class="user-info">
+                    <% if (user) { %>
+                        <span class="username">Hello, <strong>
+                                <%= user.username %>
+                            </strong>!</span>
+                        <% if (user.is_admin) { %>
+                            <span class="badge badge-admin">👑 Admin</span>
+                            <% } else if (user.is_member) { %>
+                                <span class="badge badge-member">✨ Member</span>
+                                <% } %>
+                                    <% if (!userIsMemberOrAdmin) { %>
+                                        <a href="/join-club" class="btn btn-primary">Join Club</a>
+                                        <% } %>
+                                            <a href="/logout" class="btn btn-logout">Logout</a>
+                                            <% } else { %>
+                                                <a href="/login" class="btn btn-secondary">Login</a>
+                                                <a href="/signup" class="btn btn-primary">Sign Up</a>
+                                                <% } %>
+                </div>
+            </div>
+        </header>
 
-                    <p><a href="/logout">Logout</a></p>
-                    <% } else { %>
-                        <p>Please <a href="/login">login</a> or <a href="/signup">sign up</a>.</p>
-                        <% } %>
+        <!-- Main Content -->
+        <div class="container">
+            <section class="messages-section">
+                <div class="section-header">
+                    <h2 class="section-title">Community Messages</h2>
+                </div>
 
-                            <% messages.forEach(msg=> { %>
-                                <h2>
+                <% if (messages.length> 0) { %>
+                    <div class="messages-grid">
+                        <% messages.forEach((msg, index)=> { %>
+                            <article class="message-card">
+                                <h3 class="message-title">
                                     <%= msg.title %>
-                                </h2>
-                                <p>
+                                </h3>
+                                <p class="message-content">
                                     <%= msg.content %>
                                 </p>
-                                <% if (userIsMemberOrAdmin) { %>
-                                    <small>by <%= msg.author %></small>
-                                    <% } %>
-                                        <% }) %>
+
+                                <div class="message-footer">
+                                    <% if (userIsMemberOrAdmin) { %>
+                                        <div class="message-author">
+                                            <div class="author-avatar">
+                                                <%= msg.author.charAt(0).toUpperCase() %>
+                                            </div>
+                                            <span>by <strong>
+                                                    <%= msg.author %>
+                                                </strong></span>
+                                        </div>
+                                        <% } else { %>
+                                            <div class="message-author">
+                                                <span>🔒 Join the club to see the author</span>
+                                            </div>
+                                            <% } %>
+                                </div>
+                            </article>
+                            <% }) %>
+                    </div>
+                    <% } else { %>
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📭</div>
+                            <h3 class="empty-state-title">No messages yet</h3>
+                            <p>Be the first to share something with the community!</p>
+                        </div>
+                        <% } %>
+            </section>
+        </div>
     </body>
 
 </html>

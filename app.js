@@ -5,7 +5,6 @@ const authRouter = require("./routes/authRouter");
 const session = require("express-session");
 const passport = require("./config/passport");
 const pgSession = require("connect-pg-simple")(session);
-const ensureAuthenticated = require("./middleware/auth");
 const homePageRouter = require("./routes/homePageRouter");
 
 const app = new express();
