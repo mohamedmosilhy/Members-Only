@@ -6,6 +6,7 @@ const session = require("express-session");
 const passport = require("./config/passport");
 const pgSession = require("connect-pg-simple")(session);
 const ensureAuthenticated = require("./middleware/auth");
+const homePageRouter = require("./routes/homePageRouter");
 
 const app = new express();
 
@@ -32,12 +33,6 @@ app.use(passport.session());
 
 app.use("/", authRouter);
 
-app.get("/test-auth", (req, res) => {
-  res.json(req.user || "not logged in");
-});
-
-app.get("/", ensureAuthenticated, (req, res) => {
-  res.render("index");
-});
+app.use("/", homePageRouter);
 
 app.listen(process.env.PORT || 3000);
