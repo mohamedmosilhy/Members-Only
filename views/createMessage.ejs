@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Create Message - Members Only</title>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+        <link rel="stylesheet" href="/styles.css">
+    </head>
+
+    <body>
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <a href="/" class="logo">🔐 Members Only</a>
+
+                <div class="user-info">
+                    <% if (user) { %>
+                        <span class="username">Hello, <strong>
+                                <%= user.username %>
+                            </strong>!</span>
+                        <% if (user.is_admin) { %>
+                            <span class="badge badge-admin">👑 Admin</span>
+                            <% } else if (user.is_member) { %>
+                                <span class="badge badge-member">✨ Member</span>
+                                <% } %>
+                                    <a href="/" class="btn btn-secondary">← Back to Home</a>
+                                    <a href="/logout" class="btn btn-logout">Logout</a>
+                                    <% } %>
+                </div>
+            </div>
+        </header>
+
+        <!-- Create Message Form -->
+        <div class="form-card">
+            <div class="join-icon">✍️</div>
+            <h1 class="form-title">Create New Message</h1>
+            <p class="form-description">
+                Share your thoughts with the community. Your message will be visible to everyone!
+            </p>
+
+            <form action="/create-message" method="POST">
+                <div class="form-group">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" id="title" name="title" class="form-input" placeholder="Enter a catchy title"
+                        required autofocus>
+                </div>
+
+                <div class="form-group">
+                    <label for="content" class="form-label">Content</label>
+                    <textarea id="content" name="content" class="form-input form-textarea"
+                        placeholder="Share your message with the community..." rows="6" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">
+                    Publish Message
+                </button>
+            </form>
+
+            <div class="form-footer">
+                <a href="/">Cancel and go back</a>
+            </div>
+        </div>
+    </body>
+
+</html>

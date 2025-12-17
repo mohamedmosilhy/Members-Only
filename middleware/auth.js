@@ -5,4 +5,11 @@ const ensureAuthenticated = (req, res, next) => {
   res.redirect("/login");
 };
 
-module.exports = ensureAuthenticated;
+const ensureMember = (req, res, next) => {
+  if (req.user.is_admin || req.user.is_member) {
+    return next();
+  }
+  res.redirect("/join-club");
+};
+
+module.exports = { ensureAuthenticated, ensureMember };

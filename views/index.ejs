@@ -22,8 +22,10 @@
                             </strong>!</span>
                         <% if (user.is_admin) { %>
                             <span class="badge badge-admin">👑 Admin</span>
+                            <a href="/create-message" class="btn btn-primary">Create Message</a>
                             <% } else if (user.is_member) { %>
                                 <span class="badge badge-member">✨ Member</span>
+                                <a href="/create-message" class="btn btn-primary">Create Message</a>
                                 <% } %>
                                     <% if (!userIsMemberOrAdmin) { %>
                                         <a href="/join-club" class="btn btn-primary">Join Club</a>

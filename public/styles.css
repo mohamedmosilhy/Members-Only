@@ -213,6 +213,13 @@ body {
   color: var(--text-muted);
 }
 
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+  line-height: 1.6;
+}
+
 .form-footer {
   margin-top: 2rem;
   text-align: center;

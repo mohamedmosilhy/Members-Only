@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const pool = require("../db/pool");
 const passport = require("../config/passport");
+const { get } = require("../routes/authRouter");
 
 module.exports = {
   getHomePage: async (req, res) => {
@@ -26,6 +27,17 @@ module.exports = {
         req.user.id,
       ]);
     }
+    res.redirect("/");
+  },
+  getCreateMessagePage: (req, res) => {
+    res.render("createMessage", { user: req.user });
+  },
+  postCreateMessage: async (req, res) => {
+    const { title, content } = req.body;
+    await pool.query(
+      "INSERT INTO messages (title, content, user_id, created_at) VALUES ($1, $2, $3, NOW())",
+      [title, content, req.user.id]
+    );
     res.redirect("/");
   },
 };
