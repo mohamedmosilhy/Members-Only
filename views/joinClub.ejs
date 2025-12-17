@@ -29,33 +29,40 @@
             <div class="join-icon">✨</div>
             <h1 class="join-title">Join Message Club</h1>
 
-            <% if (user.is_member || user.is_admin) { %>
-                <div class="status-message">
-                    <span>🎉</span>
-                    <span>You are already a member of the club!</span>
+            <% if (typeof error !=='undefined' ) { %>
+                <div class="alert alert-error">
+                    <%= error %>
                 </div>
-                <p class="join-description">
-                    You have full access to see all message authors. Return to the homepage to explore the community.
-                </p>
-                <a href="/" class="btn btn-primary btn-full">Go to Messages</a>
-                <% } else { %>
-                    <p class="join-description">
-                        Enter the secret code to unlock the full Members Only experience.
-                        You'll be able to see who wrote every message!
-                    </p>
+                <% } %>
 
-                    <form action="/join-club" method="POST">
-                        <div class="form-group">
-                            <label for="secretCode" class="form-label">Secret Code</label>
-                            <input type="text" id="secretCode" name="secretCode" class="form-input"
-                                placeholder="Enter the secret code" required autofocus>
+                    <% if (user.is_member || user.is_admin) { %>
+                        <div class="status-message">
+                            <span>🎉</span>
+                            <span>You are already a member of the club!</span>
                         </div>
+                        <p class="join-description">
+                            You have full access to see all message authors. Return to the homepage to explore the
+                            community.
+                        </p>
+                        <a href="/" class="btn btn-primary btn-full">Go to Messages</a>
+                        <% } else { %>
+                            <p class="join-description">
+                                Enter the secret code to unlock the full Members Only experience.
+                                You'll be able to see who wrote every message!
+                            </p>
 
-                        <button type="submit" class="btn btn-primary btn-full">
-                            Unlock Membership
-                        </button>
-                    </form>
-                    <% } %>
+                            <form action="/join-club" method="POST">
+                                <div class="form-group">
+                                    <label for="secretCode" class="form-label">Secret Code</label>
+                                    <input type="text" id="secretCode" name="secretCode" class="form-input"
+                                        placeholder="Enter the secret code" required autofocus>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-full">
+                                    Unlock Membership
+                                </button>
+                            </form>
+                            <% } %>
         </div>
     </body>
 

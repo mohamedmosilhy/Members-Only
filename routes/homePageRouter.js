@@ -4,9 +4,14 @@ const {
   getJoinClubPage,
   postJoinClub,
   getCreateMessagePage,
-  postCreateMessage
+  postCreateMessage,
+  deleteMessage,
 } = require("../controllers/homePgaeController");
-const { ensureAuthenticated, ensureMember } = require("../middleware/auth");
+const {
+  ensureAuthenticated,
+  ensureMember,
+  ensureAdmin,
+} = require("../middleware/auth");
 const homePageRouter = new express.Router();
 
 homePageRouter.get("/", getHomePage);
@@ -23,6 +28,13 @@ homePageRouter.post(
   ensureAuthenticated,
   ensureMember,
   postCreateMessage
+);
+
+homePageRouter.post(
+  "/delete-message/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  deleteMessage
 );
 
 module.exports = homePageRouter;

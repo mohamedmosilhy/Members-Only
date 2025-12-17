@@ -1,12 +1,20 @@
 {
   "name": "members-only",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "An exclusive community platform with member-only features",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "db:setup": "node db/setup.js",
+    "db:seed": "node db/seed.js"
   },
-  "keywords": [],
+  "keywords": [
+    "express",
+    "postgresql",
+    "authentication",
+    "members-only"
+  ],
   "author": "",
   "license": "ISC",
   "type": "commonjs",

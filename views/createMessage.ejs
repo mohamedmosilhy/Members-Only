@@ -40,27 +40,33 @@
                 Share your thoughts with the community. Your message will be visible to everyone!
             </p>
 
-            <form action="/create-message" method="POST">
-                <div class="form-group">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" id="title" name="title" class="form-input" placeholder="Enter a catchy title"
-                        required autofocus>
+            <% if (typeof error !=='undefined' ) { %>
+                <div class="alert alert-error">
+                    <%= error %>
                 </div>
+                <% } %>
 
-                <div class="form-group">
-                    <label for="content" class="form-label">Content</label>
-                    <textarea id="content" name="content" class="form-input form-textarea"
-                        placeholder="Share your message with the community..." rows="6" required></textarea>
-                </div>
+                    <form action="/create-message" method="POST">
+                        <div class="form-group">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" id="title" name="title" class="form-input"
+                                placeholder="Enter a catchy title" required autofocus>
+                        </div>
 
-                <button type="submit" class="btn btn-primary btn-full">
-                    Publish Message
-                </button>
-            </form>
+                        <div class="form-group">
+                            <label for="content" class="form-label">Content</label>
+                            <textarea id="content" name="content" class="form-input form-textarea"
+                                placeholder="Share your message with the community..." rows="6" required></textarea>
+                        </div>
 
-            <div class="form-footer">
-                <a href="/">Cancel and go back</a>
-            </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            Publish Message
+                        </button>
+                    </form>
+
+                    <div class="form-footer">
+                        <a href="/">Cancel and go back</a>
+                    </div>
         </div>
     </body>
 

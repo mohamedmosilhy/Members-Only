@@ -14,6 +14,7 @@ app.set("views", "views");
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.set("trust proxy", 1);
 
 app.use(
   session({
@@ -21,6 +22,7 @@ app.use(
       pool: pool,
       tableName: "session",
     }),
+    secure: process.env.NODE_ENV === "production",
     secret: process.env.SESSION_SECRET || "cats",
     resave: false,
     saveUninitialized: false,

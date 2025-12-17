@@ -12,4 +12,11 @@ const ensureMember = (req, res, next) => {
   res.redirect("/join-club");
 };
 
-module.exports = { ensureAuthenticated, ensureMember };
+const ensureAdmin = (req, res, next) => {
+  if (req.user.is_admin) {
+    return next();
+  }
+  res.redirect("/");
+};
+
+module.exports = { ensureAuthenticated, ensureMember, ensureAdmin };
