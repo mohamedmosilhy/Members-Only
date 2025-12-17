@@ -20,23 +20,27 @@ This project demonstrates advanced authentication patterns, role-based access co
 ## ✨ Features
 
 ### 🔐 **Multi-Tier Authentication System**
+
 - **Secure user registration** with bcrypt password hashing
 - **Passport.js** local strategy authentication
 - **Session-based** authentication with PostgreSQL session store
 - **Persistent sessions** across server restarts
 
 ### 👥 **Role-Based Access Control**
+
 - **Public Users**: View messages but cannot see authors or timestamps
 - **Members**: Full access to view all message details including authors
 - **Administrators**: Complete moderation capabilities with message deletion
 
 ### 💬 **Dynamic Message Board**
+
 - Create and share messages with the community
 - Real-time author attribution for verified members
 - Chronological message sorting
 - Clean, intuitive interface
 
 ### 🛡️ **Security Best Practices**
+
 - Password hashing with bcrypt (10 salt rounds)
 - SQL injection prevention with parameterized queries
 - CSRF protection
@@ -46,6 +50,7 @@ This project demonstrates advanced authentication patterns, role-based access co
 ## 🛠️ Tech Stack
 
 ### **Backend**
+
 - **Node.js** - JavaScript runtime
 - **Express 5** - Web application framework
 - **PostgreSQL** - Relational database
@@ -53,37 +58,45 @@ This project demonstrates advanced authentication patterns, role-based access co
 - **bcryptjs** - Password hashing
 
 ### **Session Management**
+
 - **express-session** - Session middleware
 - **connect-pg-simple** - PostgreSQL session store
 
 ### **Frontend**
+
 - **EJS** - Templating engine
 - **CSS3** - Custom styling
 
 ### **Database**
+
 - **PostgreSQL** - Production-grade RDBMS
 - **pg** - Node.js PostgreSQL client
 
 ## 🚀 Installation
 
 ### Prerequisites
+
 - Node.js (v18 or higher)
 - PostgreSQL (v14 or higher)
 - npm or yarn
 
 ### Step 1: Clone the Repository
+
 ```bash
 git clone <repository-url>
 cd Members-Only
 ```
 
 ### Step 2: Install Dependencies
+
 ```bash
 npm install
 ```
 
 ### Step 3: Environment Configuration
+
 Create a `.env` file in the root directory:
+
 ```env
 DATABASE_URL=postgresql://username:password@localhost:5432/members_only
 SESSION_SECRET=your-super-secret-session-key
@@ -91,6 +104,7 @@ PORT=3000
 ```
 
 ### Step 4: Database Setup
+
 ```bash
 # Create database schema
 npm run db:setup
@@ -100,6 +114,7 @@ npm run db:seed
 ```
 
 ### Step 5: Run the Application
+
 ```bash
 # Development mode with hot reload
 npm run dev
@@ -113,6 +128,7 @@ Visit `http://localhost:3000` to see the application running! 🎉
 ## 📊 Database Schema
 
 ### Users Table
+
 ```sql
 - id: SERIAL PRIMARY KEY
 - username: VARCHAR(255) UNIQUE NOT NULL
@@ -123,6 +139,7 @@ Visit `http://localhost:3000` to see the application running! 🎉
 ```
 
 ### Messages Table
+
 ```sql
 - id: SERIAL PRIMARY KEY
 - title: VARCHAR(255) NOT NULL
@@ -134,6 +151,7 @@ Visit `http://localhost:3000` to see the application running! 🎉
 ## 🎮 Usage
 
 ### Test Accounts (from seed data)
+
 ```
 Username: sarah_knight | Password: 123 | Role: Member
 Username: john_wanderer | Password: 123 | Role: User
@@ -143,6 +161,7 @@ Username: lisa_member | Password: 123 | Role: Member
 ```
 
 ### User Journey
+
 1. **Sign Up** - Create your account with a unique username
 2. **Login** - Authenticate with your credentials
 3. **Browse** - View community messages (limited access)
@@ -213,6 +232,7 @@ This application is deployed on [Railway](https://railway.app/) with PostgreSQL 
 **Live URL**: https://members-only-production-f7ed.up.railway.app/
 
 ### Deployment Steps (Railway)
+
 1. Connect GitHub repository
 2. Add PostgreSQL plugin
 3. Configure environment variables
