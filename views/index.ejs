@@ -9,25 +9,29 @@
 
     <body>
         <h1>Welcome to Members Only</h1>
-        <% if (user) { %>
-            <p>Hello, <%= user.username %>!</p>
+        <% if (!userIsMemberOrAdmin && user) { %>
+            <a href="/join-club">Join Club</a>
+            <% } %>
 
-            <p><a href="/logout">Logout</a></p>
-            <% } else { %>
-                <p>Please <a href="/login">login</a> or <a href="/signup">sign up</a>.</p>
-                <% } %>
+                <% if (user) { %>
+                    <p>Hello, <%= user.username %>!</p>
 
-                    <% messages.forEach(msg=> { %>
-                        <h2>
-                            <%= msg.title %>
-                        </h2>
-                        <p>
-                            <%= msg.content %>
-                        </p>
-                        <% if (userIsMemberOrAdmin) { %>
-                            <small>by <%= msg.author %></small>
-                            <% } %>
-                                <% }) %>
+                    <p><a href="/logout">Logout</a></p>
+                    <% } else { %>
+                        <p>Please <a href="/login">login</a> or <a href="/signup">sign up</a>.</p>
+                        <% } %>
+
+                            <% messages.forEach(msg=> { %>
+                                <h2>
+                                    <%= msg.title %>
+                                </h2>
+                                <p>
+                                    <%= msg.content %>
+                                </p>
+                                <% if (userIsMemberOrAdmin) { %>
+                                    <small>by <%= msg.author %></small>
+                                    <% } %>
+                                        <% }) %>
     </body>
 
 </html>
